@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: aeb6e131b5bd0e749a0459b9ab25b1a0
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Presets/DAZ_Studio/G3_G8_G8.1_EyelidBones.json
+  uploadId: 772244

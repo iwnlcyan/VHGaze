@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c79116da5641e864b955182f02ddf61e
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Presets/MixamoFuse.json
+  uploadId: 772244

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eca73840963496e479458e1d890ce514
+timeCreated: 1556916665
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Changelog.txt
+  uploadId: 772244

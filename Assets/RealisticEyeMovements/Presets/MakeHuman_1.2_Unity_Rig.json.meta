@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f8d4f358d2fc5764692c0d579cbfcd3a
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Presets/MakeHuman_1.2_Unity_Rig.json
+  uploadId: 772244

@@ -1,0 +1,371 @@
+{
+    "versionNumber": 1,
+    "mainWeight": 1.0,
+    "eyesWeight": 1.0,
+    "eyelidsWeight": 1.0,
+    "headControl": 1,
+    "headAnimationType": 0,
+    "updateType": 0,
+    "headBonePath": "",
+    "neckBonePath": "",
+    "spineBonePath": "",
+    "headChangeToNewTargetSpeed": 1.0,
+    "headTrackTargetSpeed": 1.0,
+    "headWeight": 1.0,
+    "bodyWeight": 0.10000000149011612,
+    "neckHorizWeight": 0.5,
+    "neckVertWeight": 0.5,
+    "resetHeadAtFrameStart": false,
+    "useMicroSaccades": true,
+    "useMacroSaccades": true,
+    "useHeadJitter": true,
+    "headJitterFrequency": 0.20000000298023225,
+    "headJitterAmplitude": 1.0,
+    "kDrawSightlinesInEditor": true,
+    "controlData": {
+        "eyeWidenOrSquint": 0.0,
+        "eyeControl": 1,
+        "eyelidBoneMode": 0,
+        "leftEyePath": "CC_Base_FacialBone/CC_Base_L_Eye",
+        "rightEyePath": "CC_Base_FacialBone/CC_Base_R_Eye",
+        "maxEyeUpBoneAngle": 20.0,
+        "maxEyeDownBoneAngle": 20.0,
+        "maxEyeUpEyeballAngle": 20.0,
+        "maxEyeDownEyeballAngle": 20.0,
+        "isEyeBallDefaultSet": false,
+        "isEyeBoneDefaultSet": true,
+        "isEyeBallLookUpSet": false,
+        "isEyeBoneLookUpSet": true,
+        "isEyeBallLookDownSet": false,
+        "isEyeBoneLookDownSet": true,
+        "isEyeBallLookLeftSet": false,
+        "isEyeBoneLookLeftSet": false,
+        "isEyeBallLookRightSet": false,
+        "isEyeBoneLookRightSet": false,
+        "leftBoneEyeRotationLimiter": {
+            "transformPath": "CC_Base_FacialBone/CC_Base_L_Eye",
+            "defaultQ": {
+                "x": -0.499997079372406,
+                "y": 0.500002920627594,
+                "z": 0.499997079372406,
+                "w": 0.500002920627594
+            },
+            "lookUpQ": {
+                "x": -0.5437707304954529,
+                "y": 0.45200932025909426,
+                "z": 0.5437718033790588,
+                "w": 0.45201021432876589
+            },
+            "lookDownQ": {
+                "x": -0.44420570135116579,
+                "y": 0.5501647591590881,
+                "z": 0.44420570135116579,
+                "w": 0.5501647591590881
+            },
+            "lookLeftQ": {
+                "x": -0.35355132818222048,
+                "y": 0.35355544090270998,
+                "z": 0.6123688220977783,
+                "w": 0.6123760342597961
+            },
+            "lookRightQ": {
+                "x": -0.6123688220977783,
+                "y": 0.6123760342597961,
+                "z": 0.35355132818222048,
+                "w": 0.35355544090270998
+            },
+            "isLookUpSet": true,
+            "isLookDownSet": true,
+            "isLookLeftSet": false,
+            "isLookRightSet": false
+        },
+        "rightBoneEyeRotationLimiter": {
+            "transformPath": "CC_Base_FacialBone/CC_Base_R_Eye",
+            "defaultQ": {
+                "x": 0.5000002980232239,
+                "y": -0.4999997615814209,
+                "z": -0.5000002980232239,
+                "w": -0.4999997615814209
+            },
+            "lookUpQ": {
+                "x": 0.5437737703323364,
+                "y": -0.4520057141780853,
+                "z": -0.5437747240066528,
+                "w": -0.4520067274570465
+            },
+            "lookDownQ": {
+                "x": 0.4442097842693329,
+                "y": -0.5501616597175598,
+                "z": -0.4442097842693329,
+                "w": -0.5501614212989807
+            },
+            "lookLeftQ": {
+                "x": 0.3535535931587219,
+                "y": -0.3535532057285309,
+                "z": -0.6123728156089783,
+                "w": -0.6123721599578857
+            },
+            "lookRightQ": {
+                "x": 0.6123728156089783,
+                "y": -0.6123721599578857,
+                "z": -0.3535535931587219,
+                "w": -0.3535532057285309
+            },
+            "isLookUpSet": true,
+            "isLookDownSet": true,
+            "isLookLeftSet": false,
+            "isLookRightSet": false
+        },
+        "leftEyeballEyeRotationLimiter": {
+            "transformPath": "",
+            "defaultQ": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "lookUpQ": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "lookDownQ": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "lookLeftQ": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "lookRightQ": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "isLookUpSet": false,
+            "isLookDownSet": false,
+            "isLookLeftSet": false,
+            "isLookRightSet": false
+        },
+        "rightEyeballEyeRotationLimiter": {
+            "transformPath": "",
+            "defaultQ": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "lookUpQ": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "lookDownQ": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "lookLeftQ": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "lookRightQ": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "isLookUpSet": false,
+            "isLookDownSet": false,
+            "isLookLeftSet": false,
+            "isLookRightSet": false
+        },
+        "eyelidControl": 2,
+        "upperLeftEyelidBonePaths": [],
+        "upperRightEyelidBonePaths": [],
+        "lowerLeftEyelidBonePaths": [],
+        "lowerRightEyelidBonePaths": [],
+        "isEyelidBonesDefaultSet": false,
+        "isEyelidBonesClosedSet": false,
+        "isEyelidBonesLookUpSet": false,
+        "isEyelidBonesLookDownSet": false,
+        "upperLeftLimiters": [],
+        "upperRightLimiters": [],
+        "lowerLeftLimiters": [],
+        "lowerRightLimiters": [],
+        "blendshapesForBlinking": [
+            {
+                "skinnedMeshRendererPath": "CC_Base_Body",
+                "defaultWeight": 0.0,
+                "positionWeight": 100.0,
+                "index": 16,
+                "name": "Eye_Blink"
+            }
+        ],
+        "blendshapesForLookingUp": [
+            {
+                "skinnedMeshRendererPath": "CC_Base_Body",
+                "defaultWeight": 0.0,
+                "positionWeight": 100.0,
+                "index": 19,
+                "name": "Eye_Wide_L"
+            },
+            {
+                "skinnedMeshRendererPath": "CC_Base_Body",
+                "defaultWeight": 0.0,
+                "positionWeight": 100.0,
+                "index": 20,
+                "name": "Eye_Wide_R"
+            },
+            {
+                "skinnedMeshRendererPath": "CC_Base_Body",
+                "defaultWeight": 0.0,
+                "positionWeight": 100.0,
+                "index": 21,
+                "name": "Eye_Squint_L"
+            },
+            {
+                "skinnedMeshRendererPath": "CC_Base_Body",
+                "defaultWeight": 0.0,
+                "positionWeight": 100.0,
+                "index": 22,
+                "name": "Eye_Squint_R"
+            }
+        ],
+        "blendshapesForLookingDown": [
+            {
+                "skinnedMeshRendererPath": "CC_Base_Body",
+                "defaultWeight": 0.0,
+                "positionWeight": 67.0999984741211,
+                "index": 16,
+                "name": "Eye_Blink"
+            },
+            {
+                "skinnedMeshRendererPath": "CC_Base_Body",
+                "defaultWeight": 0.0,
+                "positionWeight": 100.0,
+                "index": 19,
+                "name": "Eye_Wide_L"
+            },
+            {
+                "skinnedMeshRendererPath": "CC_Base_Body",
+                "defaultWeight": 0.0,
+                "positionWeight": 100.0,
+                "index": 20,
+                "name": "Eye_Wide_R"
+            }
+        ],
+        "blendshapesForLookingLeft": [],
+        "blendshapesForLookingRight": [],
+        "isEyelidBlendshapeDefaultSet": true,
+        "isEyelidBlendshapeClosedSet": true,
+        "isEyelidBlendshapeLookUpSet": true,
+        "isEyelidBlendshapeLookDownSet": true,
+        "isEyelidBlendshapeLookLeftSet": false,
+        "isEyelidBlendshapeLookRightSet": false,
+        "arePathsRelativeToHead": true
+    },
+    "kMinNextBlinkTime": 3.0,
+    "kMaxNextBlinkTime": 15.0,
+    "blinkSpeed": 1.0,
+    "eyelidsFollowEyesVertically": true,
+    "autoBlinking": true,
+    "idleTargetHorizAngle": 12.0,
+    "crossEyeCorrection": 1.0,
+    "saccadeSpeed": 0.5,
+    "macroSaccadesPerMinute": 10.0,
+    "microSaccadesPerMinuteLookingIdle": 45.0,
+    "microSaccadesPerMinuteLookingAtPOI": 80.0,
+    "limitHeadAngle": 0.0,
+    "areRotationOffsetsSet": true,
+    "eyeRoot_From_leftEyeAnchor_Q": {
+        "x": -0.7071041464805603,
+        "y": -0.0000041475414036540318,
+        "z": -0.000004096920747542754,
+        "w": 0.7071098685264587
+    },
+    "eyeRoot_From_rightEyeAnchor_Q": {
+        "x": 0.7071086168289185,
+        "y": 0.000004147525942244101,
+        "z": 0.000004096938937436789,
+        "w": -0.7071053981781006
+    },
+    "originalLeftEyeLocalQ": {
+        "x": -0.499997079372406,
+        "y": 0.500002920627594,
+        "z": 0.499997079372406,
+        "w": 0.500002920627594
+    },
+    "originalRightEyeLocalQ": {
+        "x": 0.5000002980232239,
+        "y": -0.4999997615814209,
+        "z": -0.5000002980232239,
+        "w": -0.4999997615814209
+    },
+    "eyesRootLocalQ": {
+        "x": 0.0000012814998626708985,
+        "y": 0.7071110606193543,
+        "z": -0.0000013113021850585938,
+        "w": 0.7071030139923096
+    },
+    "character_From_Head_Q": {
+        "x": -0.000001817941665649414,
+        "y": -0.000005838662218593527,
+        "z": 0.000002471341758791823,
+        "w": 1.000000238418579
+    },
+    "character_From_Neck_Q": {
+        "x": 0.14504501223564149,
+        "y": 0.000026370758860139176,
+        "z": 0.00004648741378332488,
+        "w": 0.9894253015518189
+    },
+    "headBase_From_Head_Q": {
+        "x": -0.000001817941665649414,
+        "y": -0.000005838662218593527,
+        "z": 0.000002471341758791823,
+        "w": 1.000000238418579
+    },
+    "spineBaseLocalQ": {
+        "x": 0.08778512477874756,
+        "y": 0.0000072241382440552119,
+        "z": 0.0000917579818633385,
+        "w": 0.996139645576477
+    },
+    "headBaseLocalQ": {
+        "x": 0.08778512477874756,
+        "y": 0.0000072241382440552119,
+        "z": 0.0000917579818633385,
+        "w": 0.996139645576477
+    },
+    "spineBaseLocalPos": {
+        "x": 0.000044763182813767344,
+        "y": 0.004629079252481461,
+        "z": -0.02605886571109295
+    },
+    "headBaseLocalPos": {
+        "x": -0.00002025799039984122,
+        "y": 0.3572749197483063,
+        "z": 0.03658180683851242
+    },
+    "forwardInNeckSpace": {
+        "x": -0.00003869825741276145,
+        "y": 0.2870224118232727,
+        "z": 0.9579238891601563
+    },
+    "forwardInHeadSpace": {
+        "x": 0.000011677318070724141,
+        "y": -0.000003635913117250311,
+        "z": 1.0
+    }
+}

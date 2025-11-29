@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 5a4a54394c601d84b9297b673008b340
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Scripts/Internal/EyeAndHeadAnimatorForSerialization.cs
+  uploadId: 772244

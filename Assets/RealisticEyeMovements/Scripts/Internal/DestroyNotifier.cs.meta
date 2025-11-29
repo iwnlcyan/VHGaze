@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e0c630cbbd2f4c24090a6ebed52d9b30
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Scripts/Internal/DestroyNotifier.cs
+  uploadId: 772244

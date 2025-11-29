@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6a16a4a93f6bbf444bfc51e0a7e4db78
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Presets/Reallusion/CC3_GameBase.json
+  uploadId: 772244

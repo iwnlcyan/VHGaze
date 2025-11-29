@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bce1357d3be6ffc4c8a3dd98b77806a7
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Presets/Reallusion/CC3+_StandardBlendshapes.json
+  uploadId: 772244

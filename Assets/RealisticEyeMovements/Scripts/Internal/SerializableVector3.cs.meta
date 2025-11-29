@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 187130fce6baf9b4890e15bf06c9cdd5
+timeCreated: 1443635937
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Scripts/Internal/SerializableVector3.cs
+  uploadId: 772244

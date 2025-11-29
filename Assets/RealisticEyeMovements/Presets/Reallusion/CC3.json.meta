@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 80bf1d8fde9fd884a9cab2a4a98b7730
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Presets/Reallusion/CC3.json
+  uploadId: 772244

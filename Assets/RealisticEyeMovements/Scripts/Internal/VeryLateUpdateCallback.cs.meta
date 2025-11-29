@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 872a75570f3ca8447b4eb77e19d21335
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Scripts/Internal/VeryLateUpdateCallback.cs
+  uploadId: 772244

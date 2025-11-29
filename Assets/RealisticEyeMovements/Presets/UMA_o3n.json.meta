@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2298f34f43bda2c42bce75791c92256c
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Presets/UMA_o3n.json
+  uploadId: 772244

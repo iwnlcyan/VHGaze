@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 770a66d9ac062604697bba339a26ada1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 29168
+  packageName: Realistic Eye Movements
+  packageVersion: 2.1.13
+  assetPath: Assets/RealisticEyeMovements/Demo assets/Character/Materials/_Eye_trans.mat
+  uploadId: 772244

@@ -9,3 +9,5 @@ UserSettings
 *.csproj
 .vsconfig
 VHUnityHDRP.sln
+
+/Assets/Art/

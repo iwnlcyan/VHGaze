@@ -1486,6 +1486,7 @@ namespace RealisticEyeMovements {
 
 			SetMicroSaccadeTarget( targetGlobal, blinkIfEyesMoveEnough );
 			timeToMicroSaccade += 0.75f;
+			Debug.Log("Macro Saccade");
 		}
 
 
@@ -1509,6 +1510,8 @@ namespace RealisticEyeMovements {
 		{
 			if ( controlData.eyeControl == ControlData.EyeControl.None || leftEyeAnchor == null || rightEyeAnchor == null )
 				return;
+
+			Debug.Log("Micro Saccade");
 
 			microSaccadeTargetLocal = (currentEyeTargetPOI != null ? currentEyeTargetPOI : socialTriangleLeftEyeXform).InverseTransformPoint( targetGlobal );
 

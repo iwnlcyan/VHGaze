@@ -7,7 +7,7 @@ namespace RealisticEyeMovements
 	{
 		#region fields
 
-			[SerializeField] Transform sphereXform = null;
+			[SerializeField] Transform POI = null;
 
 			public LookTargetController lookTargetController;
 
@@ -28,16 +28,45 @@ namespace RealisticEyeMovements
 
 		public void OnLookAtSphereSelected()
 		{
-			lookTargetController.LookAtPoiDirectly(sphereXform);
+			lookTargetController.LookAtPoiDirectly(POI);
             Debug.Log("OnLookAtSphereSelected");
         }
 
 
 		public void OnLookIdlySelected()
 		{
-			lookTargetController.LookAroundIdly();
-			Debug.Log("OnLookIdlySelected");
+			lookTargetController.Aversion();
+			Debug.Log("Aversion");
 		}
-		
-	}
+
+        public void MutalGaze()
+        {
+            lookTargetController.LookAtPlayer();
+            Debug.Log("Mutual Gaze");
+        }
+
+        public void OneSidedGaze()
+        {
+            lookTargetController.LookAtPlayer();
+            Debug.Log("One-Sided Gaze");
+        }
+
+        public void ReferentialGaze()
+        {
+            lookTargetController.LookAtPoiDirectly(POI);
+            Debug.Log("Referential Gaze");
+        }
+
+        public void AvertedGaze()
+        {
+            lookTargetController.LookAroundIdly();
+            Debug.Log("Averted Gaze");
+        }
+
+        //public void SaccadicGaze()
+        //{
+        //    lookTargetController.LookAroundIdly();
+        //    Debug.Log("Saccadic Gaze");
+        //}
+    }
 }

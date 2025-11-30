@@ -490,9 +490,9 @@ namespace RealisticEyeMovements {
 			nextChangePOITime = duration >= 0 ? Time.time + duration : -1;
 			ChangeStateTo(State.LookingAtPoiDirectly);
 		}
-	
-	
-		void LookAwayFromPlayer()
+
+
+        public void LookAwayFromPlayer()
 		{
 			if ( playerEyeCenterXform == null )
 				return;
@@ -512,8 +512,47 @@ namespace RealisticEyeMovements {
 			ChangeStateTo(State.LookingAwayFromPlayer);
 		}
 
+        public void Aversion()
+        {
+            if (playerEyeCenterXform == null)
+                return;
 
-		void OnCannotGetTargetIntoView()
+            if (state != State.LookingAwayFromPlayer)
+                OnLookAwayFromShyness.Invoke();
+
+            stareBackDeadtime = Random.Range(5.0f, 10.0f);
+
+            // Get character's eye center and forward direction
+            Vector3 eyeCenter = eyeAndHeadAnimator.GetOwnEyeCenter();
+            Transform headParent = eyeAndHeadAnimator.GetHeadParentXform();
+
+            // Random direction in local space
+            float horizontalAngle = Random.Range(-110f, 110f);
+            float verticalAngle = Random.Range(-18f, 12f);
+
+            // Create a direction vector
+            Vector3 lookDirection = Quaternion.Euler(verticalAngle, horizontalAngle, 0) * Vector3.forward;
+
+            // Convert to world space and create point 10 units away
+            Vector3 worldLookDirection = headParent.TransformDirection(lookDirection);
+            Vector3 awayPoint = eyeCenter + (worldLookDirection * 10f);
+
+            //Debug.Log($"Look direction angles: H={horizontalAngle}, V={verticalAngle}");
+            //Debug.DrawLine(eyeCenter, awayPoint, Color.green, 2f);
+
+            float headLatency = -Random.Range(0.05f, 0.1f);
+            eyeAndHeadAnimator.LookAtAreaAround(awayPoint, headLatency);
+
+            nextChangePOITime = Time.time + Random.Range(
+                Mathf.Min(minLookTime, maxLookTime),
+                Mathf.Max(minLookTime, maxLookTime)
+            );
+
+            ChangeStateTo(State.LookingAwayFromPlayer);
+        }
+
+
+        void OnCannotGetTargetIntoView()
 		{
 			List<Transform> _pois = CurrentPOIs();
 			

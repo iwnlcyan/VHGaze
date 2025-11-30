@@ -37096,7 +37096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7299b1720d381d45901aeba762d36ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereXform: {fileID: 1784323981}
+  POI: {fileID: 1784323981}
   lookTargetController: {fileID: 1513882686}
 --- !u!1001 &3838429581891748328
 PrefabInstance:

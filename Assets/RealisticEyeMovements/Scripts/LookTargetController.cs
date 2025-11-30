@@ -123,7 +123,6 @@ namespace RealisticEyeMovements {
 
 		#endregion
 	
-	
 		void Awake()
 		{
 			// For VR we use Unity's InputTracking to find the user's eyes, but that only gives local positions, and

@@ -3,20 +3,19 @@ using UnityEngine;
 
 namespace RealisticEyeMovements
 {
-	public class DemoController : MonoBehaviour
+	public class GazeController : MonoBehaviour
 	{
 		#region fields
 
 			[SerializeField] Transform sphereXform = null;
-			
-			LookTargetController lookTargetController;
 
-		#endregion
+			public LookTargetController lookTargetController;
 
+        #endregion
 
-		void Awake()
+        void Awake()
 		{
-			lookTargetController = FindObjectOfType<LookTargetController>();
+			//lookTargetController = FindObjectOfType<LookTargetController>();
 		}
 		
 

@@ -11,4 +11,6 @@ EditorBuildSettings:
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: a72d8d8e0fb14254ab9056c0878ed01e,
       type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: aa17e75b4abbeeb48aff22c884f89dad,
+      type: 2}
   m_UseUCBPForAssetBundles: 0

@@ -438,6 +438,22 @@ MonoBehaviour:
   m_RayMaxIterationsRT:
     m_OverrideState: 1
     m_Value: 48
+--- !u!114 &-6802116950663737483
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2702005f483a1b845a9558195ac48750, type: 3}
+  m_Name: VSTWhiteBalance
+  m_EditorClassIdentifier: 
+  active: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &-6215116375196874931
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -888,6 +904,7 @@ MonoBehaviour:
   - {fileID: 2983376790655137442}
   - {fileID: 6575863436349517168}
   - {fileID: -4180902351497107724}
+  - {fileID: -6802116950663737483}
 --- !u!114 &448115243408767295
 MonoBehaviour:
   m_ObjectHideFlags: 3

@@ -61,11 +61,11 @@ public class GazeDDMController : MonoBehaviour
 
     // ====== Dwell / Rendering Timing ======
     [Header("Fixation/Dwell Distributions (seconds)")]
-    public Vector2 dwellMutualRange = new Vector2(2.30f, 4.80f);
-    public Vector2 dwellFaceRange = new Vector2(2.50f, 6.60f);
-    public Vector2 dwellRefRange = new Vector2(3.40f, 6.00f);
-    public Vector2 dwellAvertRange = new Vector2(2.20f, 4.40f);
-    public Vector2 dwellIdleRange = new Vector2(3.50f, 4.50f);
+    public Vector2 dwellMutualRange = new Vector2(0.30f, 0.80f);
+    public Vector2 dwellFaceRange = new Vector2(0.25f, 0.60f);
+    public Vector2 dwellRefRange = new Vector2(0.40f, 0.90f);
+    public Vector2 dwellAvertRange = new Vector2(0.20f, 0.60f);
+    public Vector2 dwellIdleRange = new Vector2(0.25f, 0.50f);
 
     [Header("Head-Eye Coordination")]
     [Tooltip("Head latency per target type: negative = head leads, positive = eyes lead.")]
@@ -74,6 +74,21 @@ public class GazeDDMController : MonoBehaviour
     public float headLatencyReferential = -0.05f;
     public float headLatencyAversion = 0.1f;
     public float headLatencyIdle = 0.075f;
+
+    [Header("Random Look Directions")]
+    [Tooltip("Horizontal angle range for aversion looks (degrees).")]
+    public Vector2 aversionHorizontalRange = new Vector2(-110f, 110f);
+    [Tooltip("Vertical angle range for aversion looks (degrees).")]
+    public Vector2 aversionVerticalRange = new Vector2(-18f, 12f);
+    [Tooltip("Distance for aversion look point (meters).")]
+    public float aversionLookDistance = 10f;
+
+    [Tooltip("Horizontal angle range for idle looks (degrees).")]
+    public Vector2 idleHorizontalRange = new Vector2(-45f, 45f);
+    [Tooltip("Vertical angle range for idle looks (degrees).")]
+    public Vector2 idleVerticalRange = new Vector2(-10f, 15f);
+    [Tooltip("Distance for idle look point (meters).")]
+    public float idleLookDistance = 8f;
 
     [Header("REM Micro-Saccade Control")]
     [Tooltip("Disable REM's random micro-saccades during DDM fixations.")]
@@ -204,7 +219,7 @@ public class GazeDDMController : MonoBehaviour
                 }
                 return idleAnchor;
             case GazeTargetType.Aversion:
-                return GetAversionAnchor();
+                return GetAversionAnchor(); // Will be replaced by random point in FocusRoutine
             case GazeTargetType.IdleAnchor:
             default:
                 return idleAnchor;
@@ -230,32 +245,40 @@ public class GazeDDMController : MonoBehaviour
         // Use REM's appropriate look function based on target type
         if (type == GazeTargetType.UserEyes)
         {
-                eyeAndHeadAnimator.LookAtFace(userEyes, headLatency);
-                Debug.Log("Mutual Gaze");
+            eyeAndHeadAnimator.LookAtFace(userEyes, headLatency);
+            Debug.Log("Mutual Gaze");
         }
         else if (type == GazeTargetType.UserFace)
         {
-            // For task objects, look at specific thing
             eyeAndHeadAnimator.LookAtFace(userEyes, headLatency);
             Debug.Log("One Sided Gaze");
         }
         else if (type == GazeTargetType.Referent)
         {
-            // For task objects, look at specific thing
             eyeAndHeadAnimator.LookAtSpecificThing(target, headLatency);
             Debug.Log("Referential Gaze");
         }
         else if (type == GazeTargetType.Aversion)
         {
-            // For aversion, look at area around the down/side target
-            eyeAndHeadAnimator.LookAtAreaAround(target, headLatency);
-            Debug.Log("Aversion");
+            // Generate random aversion look direction
+            Vector3 aversionPoint = GenerateRandomLookPoint(
+                aversionHorizontalRange,
+                aversionVerticalRange,
+                aversionLookDistance
+            );
+            eyeAndHeadAnimator.LookAtAreaAround(aversionPoint, headLatency);
+            Debug.Log($"Aversion - Looking at random point: {aversionPoint}");
         }
         else // IdleAnchor
         {
-            // For idle, look around the general area
-            eyeAndHeadAnimator.LookAtAreaAround(target, headLatency);
-            Debug.Log("Idle");
+            // Generate random idle look direction
+            Vector3 idlePoint = GenerateRandomLookPoint(
+                idleHorizontalRange,
+                idleVerticalRange,
+                idleLookDistance
+            );
+            eyeAndHeadAnimator.LookAtAreaAround(idlePoint, headLatency);
+            Debug.Log($"Idle - Looking at random point: {idlePoint}");
         }
 
         // Sample dwell time from distribution
@@ -394,7 +417,28 @@ public class GazeDDMController : MonoBehaviour
         }
     }
 
-    // ---- Helper: aversion anchor (down/side from current head forward) ----
+    // ---- Helper: Generate random look point in world space ----
+    private Vector3 GenerateRandomLookPoint(Vector2 horizontalRange, Vector2 verticalRange, float distance)
+    {
+        // Get character's eye center and head parent transform
+        Vector3 eyeCenter = eyeAndHeadAnimator.GetOwnEyeCenter();
+        Transform headParent = eyeAndHeadAnimator.GetHeadParentXform();
+
+        // Random direction in local space
+        float horizontalAngle = UnityEngine.Random.Range(horizontalRange.x, horizontalRange.y);
+        float verticalAngle = UnityEngine.Random.Range(verticalRange.x, verticalRange.y);
+
+        // Create a direction vector in local space
+        Vector3 lookDirection = Quaternion.Euler(verticalAngle, horizontalAngle, 0) * Vector3.forward;
+
+        // Convert to world space and create point at specified distance
+        Vector3 worldLookDirection = headParent.TransformDirection(lookDirection);
+        Vector3 lookPoint = eyeCenter + (worldLookDirection * distance);
+
+        return lookPoint;
+    }
+
+    // ---- Helper: aversion anchor (deprecated - using random point generation instead) ----
     private Transform GetAversionAnchor()
     {
         if (!_aversionAnchor)

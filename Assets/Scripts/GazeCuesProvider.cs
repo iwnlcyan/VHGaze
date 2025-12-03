@@ -338,7 +338,7 @@ public class GazeCuesProvider : MonoBehaviour, CuesProvider
         if (!Application.isPlaying) return;
 
         // Simple debug display
-        GUILayout.BeginArea(new Rect(10, 10, 300, 200));
+        GUILayout.BeginArea(new Rect(10, 10, 300, 300));
         GUILayout.Box("Gaze Cues Debug");
         GUILayout.Label($"Mic Active: {isMicActive}");
         GUILayout.Label($"User Speaking: {userSpeakingValue:F2}");

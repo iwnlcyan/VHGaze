@@ -40,6 +40,13 @@ public class GazeDDMController : MonoBehaviour
     [Tooltip("Simulation substep for accumulation (seconds).")]
     public float ddmDt = 0.01f;
 
+    [Tooltip("Drift per target")]
+    public float debugDriftEyes;
+    public float debugDriftFace;
+    public float debugDriftReferent;
+    public float debugDriftAversion;
+    public float debugDriftIdle;
+
     [Tooltip("Decision thresholds per target (smaller = easier to choose).")]
     public float lambdaEyes = 0.25f;
     public float lambdaFace = 0.26f;
@@ -57,15 +64,15 @@ public class GazeDDMController : MonoBehaviour
     [Tooltip("Inhibition-of-return window (seconds).")]
     public float inhibitionOfReturnTime = 0.9f;
     [Tooltip("IOR penalty applied multiplicatively when target was recently fixated.")]
-    [Range(0.3f, 1f)] public float iorFactor = 0.6f;
+    [Range(0.3f, 1f)] public float iorFactor = 0.3f;
 
     // ====== Dwell / Rendering Timing ======
     [Header("Fixation/Dwell Distributions (seconds)")]
-    public Vector2 dwellMutualRange = new Vector2(0.30f, 0.80f);
-    public Vector2 dwellFaceRange = new Vector2(0.25f, 0.60f);
-    public Vector2 dwellRefRange = new Vector2(0.40f, 0.90f);
-    public Vector2 dwellAvertRange = new Vector2(0.20f, 0.60f);
-    public Vector2 dwellIdleRange = new Vector2(0.25f, 0.50f);
+    public Vector2 dwellMutualRange = new Vector2(2.30f, 4.80f);
+    public Vector2 dwellFaceRange = new Vector2(2.50f, 6.60f);
+    public Vector2 dwellRefRange = new Vector2(3.40f, 6.00f);
+    public Vector2 dwellAvertRange = new Vector2(2.20f, 4.40f);
+    public Vector2 dwellIdleRange = new Vector2(3.50f, 4.50f);
 
     [Header("Head-Eye Coordination")]
     [Tooltip("Head latency per target type: negative = head leads, positive = eyes lead.")]
@@ -382,37 +389,42 @@ public class GazeDDMController : MonoBehaviour
         switch (t)
         {
             case GazeTargetType.UserEyes:
-                return
+                debugDriftEyes =
                     0.55f * userLooksAtMe +
                     0.25f * turnYieldCue +
                     0.20f * affiliationGoal -
                     0.25f * cognitiveLoad -
                     0.20f * proximity;
+                return debugDriftEyes;
 
             case GazeTargetType.UserFace:
-                return
+                debugDriftFace =
                     0.40f * userLooksAtMe +
                     0.15f * turnYieldCue +
                     0.25f * affiliationGoal +
                     0.20f * comfortPrior -
                     0.10f * cognitiveLoad;
+                return debugDriftFace;
 
             case GazeTargetType.Referent:
-                return
+                debugDriftReferent =
                     (0.45f * deixis +
                     0.25f * referentSal) *
                     (1f - userSpeaking) +
                     0.45f * userLooksAtTarget * userSpeaking;
+                return debugDriftReferent;
 
             case GazeTargetType.Aversion:
                 float longMutual = cues.LongMutualGazeTimer();
-                return
+                debugDriftAversion =
                     0.45f * cognitiveLoad +
                     0.35f * longMutual +
                     0.20f * proximity;
+                return debugDriftAversion;
 
             case GazeTargetType.IdleAnchor:
-                return 0.05f;
+                debugDriftIdle = 0.05f;
+                return debugDriftIdle;
 
             default:
                 return 0f;
@@ -480,6 +492,23 @@ public class GazeDDMController : MonoBehaviour
             eyeAndHeadAnimator.useMicroSaccades = originalUseMicroSaccades;
             eyeAndHeadAnimator.useMacroSaccades = originalUseMacroSaccades;
         }
+    }
+
+    void OnGUI()
+    {
+        if (!Application.isPlaying) return;
+
+        // Simple debug display
+        GUILayout.BeginArea(new Rect(10, 320, 300, 250));
+        GUILayout.Box("DDM Drift Values");
+
+        GUILayout.Label($"Eyes Drift:      {debugDriftEyes:F3}");
+        GUILayout.Label($"Face Drift:      {debugDriftFace:F3}");
+        GUILayout.Label($"Referent Drift:  {debugDriftReferent:F3}");
+        GUILayout.Label($"Aversion Drift:  {debugDriftAversion:F3}");
+        GUILayout.Label($"Idle Drift:      {debugDriftIdle:F3}");
+
+        GUILayout.EndArea();
     }
 }
 

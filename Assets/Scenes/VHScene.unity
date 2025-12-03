@@ -27805,12 +27805,6 @@ MonoBehaviour:
   m_Size: {x: 13, y: 13, z: 4}
   m_FadeFactor: 0.3
   m_Version: 3
---- !u!4 &1812259188 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6585614131026700619, guid: e02adeeb6175a3a44b133b01440abc6f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1827143617}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1812347015
 GameObject:
   m_ObjectHideFlags: 0
@@ -36408,7 +36402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7299b1720d381d45901aeba762d36ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userEyes: {fileID: 1812259188}
+  userEyes: {fileID: 1448386486}
   userFace: {fileID: 1448386486}
   referents:
   - anchor: {fileID: 1784323981}
@@ -36418,6 +36412,11 @@ MonoBehaviour:
   maxDecisionTime: 0.2
   noiseLevel: 0.08
   ddmDt: 0.01
+  debugDriftEyes: 0
+  debugDriftFace: 0
+  debugDriftReferent: 0
+  debugDriftAversion: 0
+  debugDriftIdle: 0
   lambdaEyes: 0.28
   lambdaFace: 0.26
   lambdaRef: 0.24

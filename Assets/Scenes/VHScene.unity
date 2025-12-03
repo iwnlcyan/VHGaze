@@ -720,6 +720,12 @@ PlayableDirector:
   m_SceneBindings: []
   m_ExposedReferences:
     m_References: []
+--- !u!4 &73774480 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -5558108560977913838, guid: f87f828ef789fcd439e87e2d4754c81e,
+    type: 3}
+  m_PrefabInstance: {fileID: 178446845}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &78737993
 GameObject:
   m_ObjectHideFlags: 0
@@ -14622,6 +14628,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 701791699}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1011415078 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5595884276990091823, guid: e02adeeb6175a3a44b133b01440abc6f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1827143617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3381ebb3eb0b79f489a07be0efdfcd37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1027290277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21164,6 +21182,12 @@ MonoBehaviour:
   m_Size: {x: 8, y: 8, z: 1}
   m_FadeFactor: 0.18
   m_Version: 3
+--- !u!4 &1478543980 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3664263889821975548, guid: e02adeeb6175a3a44b133b01440abc6f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1827143617}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1491292261
 GameObject:
   m_ObjectHideFlags: 0
@@ -36364,6 +36388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1046614542783937105}
   - component: {fileID: 3773286552146400311}
+  - component: {fileID: 3773286552146400312}
   m_Layer: 0
   m_Name: GazeController
   m_TagString: Untagged
@@ -36415,8 +36440,41 @@ MonoBehaviour:
   headLatencyReferential: -0.05
   headLatencyAversion: 0.1
   headLatencyIdle: 0.075
+  aversionHorizontalRange: {x: -110, y: 110}
+  aversionVerticalRange: {x: -18, y: 12}
+  aversionLookDistance: 10
+  idleHorizontalRange: {x: -45, y: 45}
+  idleVerticalRange: {x: -10, y: 15}
+  idleLookDistance: 8
   suppressREMMicroSaccades: 1
   suppressREMMacroSaccades: 1
+--- !u!114 &3773286552146400312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3773286552146400310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6493ce09a18a4c142a0e7a8ef87901ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userHead: {fileID: 1478543980}
+  agentHead: {fileID: 73774480}
+  eyeTrackingExample: {fileID: 1011415078}
+  agentFaceCenter: {fileID: 73774480}
+  gazeHitDistanceThreshold: 0.25
+  smoothingFactor: 0.7
+  simulatedTurnYield: 0
+  simulatedAffiliationGoal: 0.6
+  simulatedCognitiveLoad: 0.2
+  simulatedUserSpeaking: 0
+  simulatedDeixis: 0
+  simulatedComfortPrior: 0.5
+  simulatedReferentPriority: 0
+  minProximity: 0.8
+  maxProximity: 3
 --- !u!1001 &3838429581891748328
 PrefabInstance:
   m_ObjectHideFlags: 0

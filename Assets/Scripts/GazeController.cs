@@ -37,18 +37,18 @@ namespace RealisticEyeMovements
             // ====== DDM Core Settings ======
             [Header("DDM Settings")]
             [Tooltip("Max time to accumulate evidence per decision epoch (seconds).")]
-            public float maxDecisionTime = 0.2f;
+            public float maxDecisionTime = 0.3f;
             [Tooltip("Additive Gaussian noise gain per step.")]
-            public float noiseLevel = 0.08f;
+            public float noiseLevel = 0.05f;
             [Tooltip("Simulation substep for accumulation (seconds).")]
             public float ddmDt = 0.01f;
 
             [Tooltip("Decision thresholds per target (smaller = easier to choose).")]
-            public float lambdaEyes = 0.28f;
-            public float lambdaFace = 0.26f;
-            public float lambdaRef = 0.24f;
-            public float lambdaAvert = 0.22f;
-            public float lambdaIdle = 0.30f;
+            public float lambdaEyes = 0.48f;
+            public float lambdaFace = 0.46f;
+            public float lambdaRef = 0.44f;
+            public float lambdaAvert = 0.42f;
+            public float lambdaIdle = 0.60f;
 
             [Tooltip("Bias terms per target (positive biases tilt choice).")]
             public float biasEyes = 0.02f;   // affiliative style
@@ -60,15 +60,15 @@ namespace RealisticEyeMovements
             [Tooltip("Inhibition-of-return window (seconds).")]
             public float inhibitionOfReturnTime = 0.9f;
             [Tooltip("IOR penalty applied multiplicatively when target was recently fixated.")]
-            [Range(0.3f, 1f)] public float iorFactor = 0.6f;
+            [Range(0.3f, 1f)] public float iorFactor = 0.3f;
 
             // ====== Dwell / Rendering Timing ======
             [Header("Fixation/Dwell Distributions (seconds)")]
-            public Vector2 dwellMutualRange = new Vector2(0.30f, 0.80f);
-            public Vector2 dwellFaceRange = new Vector2(0.25f, 0.60f);
-            public Vector2 dwellRefRange = new Vector2(0.40f, 0.90f);
-            public Vector2 dwellAvertRange = new Vector2(0.20f, 0.60f);
-            public Vector2 dwellIdleRange = new Vector2(0.25f, 0.50f);
+            public Vector2 dwellMutualRange = new Vector2(2.30f, 4.80f);
+            public Vector2 dwellFaceRange = new Vector2(2.50f, 6.60f);
+            public Vector2 dwellRefRange = new Vector2(3.40f, 6.00f);
+            public Vector2 dwellAvertRange = new Vector2(2.20f, 4.40f);
+            public Vector2 dwellIdleRange = new Vector2(3.50f, 4.50f);
 
             [Header("Onset & Motion")]
             [Tooltip("Saccade onset latency jitter (s).")]
@@ -114,10 +114,14 @@ namespace RealisticEyeMovements
 
         void Update()
         {
-            // update IOR timers
-            foreach (var t in allTargets) lastFixatedAgo[t] += Time.deltaTime;
+            if (isFixating)
+            {
+                // Still increment IOR timers
+                foreach (var t in allTargets)
+                    lastFixatedAgo[t] += Time.deltaTime;
 
-            if (isFixating) return; // wait until current fixation completes
+                return;
+            }
 
             // Run a short DDM epoch to choose next target
             var choice = RunDDMEpoch();
@@ -185,42 +189,57 @@ namespace RealisticEyeMovements
         // ---- Fixation routine (handles onset latency, dwell, micro-saccades, head/eye blend) ----
         private IEnumerator FocusRoutine(GazeTargetType type, Transform target)
         {
+            // LOCK the DDM
             isFixating = true;
             currentType = type;
             currentTarget = target;
 
-            // Onset latency
+            // ---- Onset latency ----
             float onset = UnityEngine.Random.Range(onsetLatencyRange.x, onsetLatencyRange.y);
             yield return new WaitForSeconds(onset);
 
-            // Configure head/eye blend
-            float eyeBlend = EyeBlendFor(type);
-            //eyeHead.SetHeadEyeBlend(eyeBlend);
+            // ---- Execute your gaze behavior ----
+            switch (type)
+            {
+                case GazeTargetType.UserEyes:
+                    MutalGaze();
+                    break;
 
-            // Move gaze
-            //eyeHead.LookAt(target);
+                case GazeTargetType.UserFace:
+                    OneSidedGaze();
+                    break;
 
-            // Dwell time from distribution
+                case GazeTargetType.Referent:
+                    ReferentialGaze();
+                    break;
+
+                case GazeTargetType.Aversion:
+                    AvertedGaze();
+                    break;
+
+                case GazeTargetType.IdleAnchor:
+                default:
+                    AvertedGaze();
+                    break;
+            }
+
+            // ---- Dwell time (THIS PART WAS MISSING!) ----
             float dwell = DwellFor(type);
             float elapsed = 0f;
-            //float nextMicro = enableMicroSaccades ? UnityEngine.Random.Range(microISI.x, microISI.y) : float.MaxValue;
 
-            //while (elapsed < dwell)
-            //{
-            //    if (enableMicroSaccades && (elapsed >= nextMicro))
-            //    {
-            //        ApplyMicroSaccadeAround(target);
-            //        nextMicro = elapsed + UnityEngine.Random.Range(microISI.x, microISI.y);
-            //    }
-            //    elapsed += Time.deltaTime;
-            //    yield return null;
-            //}
+            while (elapsed < dwell)
+            {
+                elapsed += Time.deltaTime;
+                yield return null;   // <-- THIS PAUSES THE DDM LOOP
+            }
 
-            // Update IOR memory
+            // ---- Update IOR memory ----
             lastFixatedAgo[type] = 0f;
 
+            // ---- UNLOCK the DDM ----
             isFixating = false;
         }
+
 
         //private void ApplyMicroSaccadeAround(Transform anchor)
         //{
@@ -243,18 +262,18 @@ namespace RealisticEyeMovements
             }
         }
 
-        private float EyeBlendFor(GazeTargetType type)
-        {
-            switch (type)
-            {
-                case GazeTargetType.UserEyes: return eyeBlendAffiliative;
-                case GazeTargetType.UserFace: return eyeBlendFaceSoft;
-                case GazeTargetType.Referent: return eyeBlendReferential;
-                case GazeTargetType.Aversion: return eyeBlendAversion;
-                case GazeTargetType.IdleAnchor: return eyeBlendIdle;
-                default: return 0.7f;
-            }
-        }
+        //private float EyeBlendFor(GazeTargetType type)
+        //{
+        //    switch (type)
+        //    {
+        //        case GazeTargetType.UserEyes: return eyeBlendAffiliative;
+        //        case GazeTargetType.UserFace: return eyeBlendFaceSoft;
+        //        case GazeTargetType.Referent: return eyeBlendReferential;
+        //        case GazeTargetType.Aversion: return eyeBlendAversion;
+        //        case GazeTargetType.IdleAnchor: return eyeBlendIdle;
+        //        default: return 0.7f;
+        //    }
+        //}
 
         private float ThresholdFor(GazeTargetType t)
         {

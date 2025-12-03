@@ -41,16 +41,16 @@ public class GazeDDMController : MonoBehaviour
     public float ddmDt = 0.01f;
 
     [Tooltip("Decision thresholds per target (smaller = easier to choose).")]
-    public float lambdaEyes = 0.28f;
+    public float lambdaEyes = 0.25f;
     public float lambdaFace = 0.26f;
-    public float lambdaRef = 0.24f;
+    public float lambdaRef = 0.28f;
     public float lambdaAvert = 0.22f;
     public float lambdaIdle = 0.30f;
 
     [Tooltip("Bias terms per target (positive biases tilt choice).")]
     public float biasEyes = 0.02f;
     public float biasFace = 0.01f;
-    public float biasRef = 0.02f;
+    public float biasRef = 0.01f;
     public float biasAvert = 0.00f;
     public float biasIdle = 0.00f;
 
@@ -376,6 +376,7 @@ public class GazeDDMController : MonoBehaviour
         float deixis = cues.UtteranceContainsDeixis();
         float referentSal = cues.BestReferentPriority();
         float userSpeaking = cues.UserIsSpeaking();
+        float userLooksAtTarget = cues.UserIsLookingAtTarget();
         float comfortPrior = cues.ComfortPrior();
 
         switch (t)
@@ -398,9 +399,10 @@ public class GazeDDMController : MonoBehaviour
 
             case GazeTargetType.Referent:
                 return
-                    0.45f * deixis +
-                    0.35f * referentSal +
-                    0.20f * (1f - userSpeaking);
+                    (0.45f * deixis +
+                    0.25f * referentSal) *
+                    (1f - userSpeaking) +
+                    0.45f * userLooksAtTarget * userSpeaking;
 
             case GazeTargetType.Aversion:
                 float longMutual = cues.LongMutualGazeTimer();
@@ -503,6 +505,7 @@ public interface CuesProvider
     float UtteranceContainsDeixis();
     float BestReferentPriority();
     float UserIsSpeaking();
+    float UserIsLookingAtTarget();
     float ComfortPrior();
     float LongMutualGazeTimer();
 }

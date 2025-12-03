@@ -22,6 +22,9 @@ public class GazeCuesProvider : MonoBehaviour, CuesProvider
     [Tooltip("Distance threshold for detecting gaze on agent's face (meters).")]
     public float gazeHitDistanceThreshold = 0.25f;
 
+    [Tooltip("Distance threshold for detecting user looking at referent objects (meters).")]
+    public float referentGazeThreshold = 0.4f;
+
     [Tooltip("Smoothing factor for detection (0=instant, 1=very smooth).")]
     [Range(0f, 0.95f)] public float smoothingFactor = 0.7f;
 
@@ -44,6 +47,7 @@ public class GazeCuesProvider : MonoBehaviour, CuesProvider
     [Range(0f, 1f)] public float simulatedAffiliationGoal = 0.6f;
     [Range(0f, 1f)] public float simulatedCognitiveLoad = 0.2f;
     [Range(0f, 1f)] public float simulatedUserSpeaking = 0f;
+    [Range(0f, 1f)] public float simulatedUserLookingAtTarget = 0f;
     [Range(0f, 1f)] public float simulatedDeixis = 0f;
     [Range(0f, 1f)] public float simulatedComfortPrior = 0.5f;
     [Range(0f, 1f)] public float simulatedReferentPriority = 0f;
@@ -54,6 +58,7 @@ public class GazeCuesProvider : MonoBehaviour, CuesProvider
 
     // Runtime state - Eye Tracking
     private float userLookingAtMeValue = 0f;
+    private float userLookingAtTargetValue = 0f;
     private float mutualGazeTimer = 0f;
 
     // Runtime state - ASR / Turn-Taking
@@ -99,6 +104,11 @@ public class GazeCuesProvider : MonoBehaviour, CuesProvider
 
         // Smooth the value to avoid jitter
         userLookingAtMeValue = Mathf.Lerp(userLookingAtMeValue, detectedLooking,
+            1f - smoothingFactor);
+
+        // Detect if user is looking at any referent object
+        float detectedLookingAtTarget = DetectUserLookingAtReferent();
+        userLookingAtTargetValue = Mathf.Lerp(userLookingAtTargetValue, detectedLookingAtTarget,
             1f - smoothingFactor);
 
         // Update mutual gaze timer
@@ -201,6 +211,39 @@ public class GazeCuesProvider : MonoBehaviour, CuesProvider
         return probability;
     }
 
+    /// <summary>
+    /// Detects if user is looking at any referent object.
+    /// Checks against referents from the GazeDDMController.
+    /// </summary>
+    private float DetectUserLookingAtReferent()
+    {
+        if (eyeTrackingExample == null || eyeTrackingExample.fixationPointTransform == null)
+            return 0f;
+
+        // Get reference to GazeDDMController to access referent list
+        GazeDDMController gazeController = GetComponent<GazeDDMController>();
+        if (gazeController == null || gazeController.referents == null || gazeController.referents.Count == 0)
+            return 0f;
+
+        Vector3 gazePoint = eyeTrackingExample.fixationPointTransform.position;
+
+        // Find closest referent
+        float minDistance = float.MaxValue;
+        foreach (var referent in gazeController.referents)
+        {
+            if (referent == null || referent.anchor == null) continue;
+
+            float distance = Vector3.Distance(gazePoint, referent.anchor.position);
+            if (distance < minDistance)
+                minDistance = distance;
+        }
+
+        // Convert distance to probability
+        float probability = Mathf.Clamp01(1f - (minDistance / referentGazeThreshold));
+
+        return probability;
+    }
+
     // ---------------------------
     // Interface Implementations
     // ---------------------------
@@ -246,6 +289,11 @@ public class GazeCuesProvider : MonoBehaviour, CuesProvider
     public float UserIsSpeaking()
     {
         return userSpeakingValue;
+    }
+
+    public float UserIsLookingAtTarget()
+    {
+        return userLookingAtTargetValue;
     }
 
     public float ComfortPrior()
@@ -295,7 +343,8 @@ public class GazeCuesProvider : MonoBehaviour, CuesProvider
         GUILayout.Label($"Mic Active: {isMicActive}");
         GUILayout.Label($"User Speaking: {userSpeakingValue:F2}");
         GUILayout.Label($"Turn Yield: {turnYieldValue:F2}");
-        GUILayout.Label($"User Looking: {userLookingAtMeValue:F2}");
+        GUILayout.Label($"User Looks At Agent: {userLookingAtMeValue:F2}");
+        GUILayout.Label($"User Looks At Target: {userLookingAtTargetValue:F2}");
         GUILayout.Label($"Mutual Gaze Timer: {mutualGazeTimer:F2}");
         GUILayout.Label($"\nPress [{micToggleKey}] to toggle mic");
         GUILayout.EndArea();
